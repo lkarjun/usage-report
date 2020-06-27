@@ -6,7 +6,7 @@ def load_credential():
     pass
 
 
-def main(message: str) -> str:
+def main(message: str) -> int:
     """ for sending report """
     try:
         mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
@@ -15,6 +15,6 @@ def main(message: str) -> str:
         to_address = load_credential()
         mail_server.login(send_address, passs)
         mail_server.sendmail(send_address, to_address, message)
-        return str(1)
+        return 1
     except Exception as e:
-        return f'Please contact Technical team issue is: {e}'
+        return 0
