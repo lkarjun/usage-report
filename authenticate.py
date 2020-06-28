@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
-from typing import ByteString, TextIO
+from typing import Union, TextIO
 
 #generate key
 class Securing:
@@ -12,7 +12,7 @@ class Securing:
         with open('credential\Key.bin', 'wb') as key_to_file:
             key_to_file.write(key)
 
-    def keyLoading(self) -> ByteString:
+    def keyLoading(self) -> Union[bytes, str]:
         '''
         gen_key() generated file loading
         '''
@@ -22,16 +22,17 @@ class Securing:
         '''
         encrypting credentials
         '''
-        key = keyLoading()
+        key = self.keyLoading()
         f = Fernet(key)
-        f.encrypt(message)
+        f.encrypt(message.encode())
 
         return 0
 
-    def decrypt_data(self, filename: TextIO) -> int:
+    def decrypt_data(self, filename: str) -> int:
         '''
         decrypting the credential file
         '''
+        key = self.keyLoading()
         f = Fernet(key)
         with open(filename, 'rb') as file:
             encrypted_data = file.read()
