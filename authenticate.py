@@ -41,3 +41,18 @@ class Securing:
 
         return 0
 
+class FileManage(Securing):
+
+    fileName = 'cred.bin'
+
+    def add_data(self):
+        '''it will write essential data from user, its important for email procsessing'''
+
+        receiver_mail = str(input('Please Enter Receiver Mail Address: '))
+        sending_mail = str(input('Please Enter Sender Mail Address: '))
+        sending_mail_password = str(input(f'Enter Password {sending_mail} : '))
+
+        with open('credential\cred.bin', 'w') as file:
+             file.write(f'password: {sending_mail_password}\n')
+             file.write(f'sender_mail: {sending_mail}\n')
+             file.write(f'receiver_mail: {receiver_mail}\n')
