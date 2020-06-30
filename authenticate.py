@@ -2,8 +2,8 @@ from cryptography.fernet import Fernet
 from typing import Union, TextIO
 
 fileName = 'credential\cred.bin'
-keyName = None
-#generate key
+keyName = 'credential\Key.bin'
+
 class Securing:
 
     def genKey(self):
@@ -11,14 +11,14 @@ class Securing:
         Generates a key and save it into a file
         '''
         key = Fernet.generate_key()
-        with open('credential\Key.bin', 'wb') as key_to_file:
+        with open(keyName, 'wb') as key_to_file:
             key_to_file.write(key)
 
     def keyLoading(self) -> Union[bytes, str]:
         '''
         gen_key() generated file loading
         '''
-        return open('credential\Key.bin', 'rb').read()
+        return open(keyName, 'rb').read()
 
     def encrypt_data(self) -> int:
         '''
