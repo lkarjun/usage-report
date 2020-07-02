@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
-from typing import Union, TextIO
+from typing import Union
 
 fileName = 'credential\cred.bin'
 keyName = 'credential\Key.bin'
