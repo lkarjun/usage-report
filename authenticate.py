@@ -1,7 +1,8 @@
 from cryptography.fernet import Fernet
 from typing import Union
+import yaml
 
-fileName = 'credential\cred.bin'
+fileName = 'credential\cred.yaml'
 keyName = 'credential\Key.bin'
 
 class Securing:
@@ -30,8 +31,7 @@ class Securing:
             file_data = file.read()
         
         encrypted_data = f.encrypt(file_data)
-        print(encrypted_data)
-
+        
         with open(fileName, 'wb') as file:
             file.write(encrypted_data)
 
@@ -61,8 +61,43 @@ class FileManage(Securing):
         receiver_mail = str(input('Please Enter Receiver Mail Address: '))
         sending_mail = str(input('Please Enter Sender Mail Address: '))
         sending_mail_password = str(input(f'Enter Password {sending_mail} : '))
+        names = ['receiverMail', 'sendingMail', 'sendingMailPassword']
+        values = [receiver_mail, sending_mail, sending_mail_password]
 
         with open(fileName, 'w') as file:
-             file.write(f'password: {sending_mail_password}\n')
-             file.write(f'sender_mail: {sending_mail}\n')
-             file.write(f'receiver_mail: {receiver_mail}\n')
+            ziped_file = dict(zip(names, values))
+            yaml.safe_dump(ziped_file, file)
+        
+    def sendReceiverEmail(self) -> str:
+        '''
+        decrypt the data and send the data then encrypt
+        '''
+        self.decrypt_data()
+        openData = open(fileName)
+        loadData = yaml.load(openData, Loader=yaml.FullLoader)
+        copyFile = loadData.copy()
+        openData.close()
+        self.encrypt_data()
+        return copyFile["receiverMail"]
+
+    def sendSenderEmail(self) -> str:
+        '''
+        decrypt the data and send the sendSenderEmail data then encrypt
+        '''
+        self.decrypt_data()
+        openData = open(fileName)
+        loadData = yaml.load(openData, Loader=yaml.FullLoader)
+        copyFile = loadData.copy()
+        self.encrypt_data()
+        return copyFile['sendingMail']
+    
+    def sendSenderPassword(self) -> str:
+        '''
+        decrypt the data and send the senderEmail password data then encrypt
+        '''
+        self.decrypt_data()
+        openData = open(fileName)
+        loadData = yaml.load(openData, Loader=yaml.FullLoader)
+        copyFile = loadData.copy()
+        self.encrypt_data()
+        return copyFile['sendingMailPassword']
