@@ -1,2 +1,5 @@
 .mypy_cache
 __pycache__
+report.pdf
+.vscode
+tempCodeRunnerFile.py

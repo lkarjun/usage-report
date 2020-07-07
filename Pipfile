@@ -5,10 +5,12 @@ verify_ssl = true
 
 [dev-packages]
 mypy = "*"
+pylint = "*"
 
 [packages]
 psutil = "*"
 cryptography = "*"
+reportlab = "*"
 
 [requires]
 python_version = "3.8"

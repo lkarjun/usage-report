@@ -1,20 +1,18 @@
 import smtplib
+from authenticate import FileManage
 
-
-def load_credential():
-    """ to load some basic credential """
-    pass
-
+auth = FileManage()
 
 def main(message: str) -> int:
     """ for sending report """
     try:
         mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
-        send_address = "techminded25@gmail.com"
-        passs = "Iphone@670"
-        to_address = load_credential()
+        """ to loading some credential """
+        send_address = auth.sendSenderEmail()
+        passs = auth.sendSenderPassword()
+        to_address = auth.sendReceiverEmail()
         mail_server.login(send_address, passs)
         mail_server.sendmail(send_address, to_address, message)
-        return 1
-    except Exception as e:
         return 0
+    except:
+        return 1
