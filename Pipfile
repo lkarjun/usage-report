@@ -11,6 +11,7 @@ pylint = "*"
 psutil = "*"
 cryptography = "*"
 reportlab = "*"
+winapps = "*"
 
 [requires]
 python_version = "3.8"
