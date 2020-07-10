@@ -1,34 +1,33 @@
-import re
-import winapps
+from re import findall
 from winapps import list_installed
-import psutil
+from psutil import process_iter
 from typing import List, Literal
 
 def listapps() -> List:
         '''Load all apps and return apps name as List'''
-        apps_load = winapps.list_installed()
+        apps_load = list_installed()
         #listing and converting to string
         listing_all_apps = [str(i) for i in apps_load]
         regrex = r"name=['][\w\s]*[']"
         #Slicing for getting apps name only
         apps = [
-                app[6:-1]
+                app[6:-1].lower()
                 for detail in listing_all_apps
-                for app in re.findall(regrex, detail)
+                for app in findall(regrex, detail)
                 ]
                 #avoiding duplicate and return List
         return list(set(apps))
 
 def listprocessor() -> List:
         '''Load all runing apps and return apps name as List'''
-        apps_load = psutil.process_iter()
+        apps_load = process_iter()
         listing_all_apps = [str(i) for i in apps_load]
         regrex = r"name=['][\w\s.]*[']"
         #Slicing for getting apps name only
         apps = [
-                app[6:-5]
+                app[6:-5].lower()
                 for detail in listing_all_apps
-                for app in re.findall(regrex, detail)
+                for app in findall(regrex, detail)
         ]
         #avoiding duplicate and return List
         return list(set(apps))
