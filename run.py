@@ -32,6 +32,9 @@ def listprocessor() -> List:
         #avoiding duplicate and return List
         return list(set(apps))
 
+def counting(apps: List[str], runningapps: List[str]) -> float:
+        pass
+
 if __name__ == "__main__":
         pass
         
