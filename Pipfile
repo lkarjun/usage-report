@@ -12,6 +12,7 @@ psutil = "*"
 cryptography = "*"
 reportlab = "*"
 winapps = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.8"
