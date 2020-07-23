@@ -65,8 +65,17 @@ def usage_alert(usageReport: dict) -> int:
     Story=[]
     mainTitle = 'USAGE ALERT'
     d = datetime.date.today()
-    table_style = [('GRID', (0,0), (-1,-1), 1, colors.black)]
-    report_table = Table(data=table_data, style=table_style, hAlign='LEFT')
+    #table style fixing
+    report_table = Table(data=table_data, hAlign='LEFT',
+            style=[
+                ('FONTSIZE', (0,0), (-1,-1), 14),
+                ('RIGHTPADDING', (0, 0), (-1, -1), 25),
+                ('BACKGROUND', (0, 0), (-1, -1), colors.lightgrey),
+                ('LEFTPADDING', (0, 0), (-1, -1), 25),
+                ('TOPPADDING', (0, 0), (-1, -1), 10),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 15),
+            ])
+
     subtitle = 'Apps using high memory and cpu usage.'
     formatted_time = time.ctime()
     styles=getSampleStyleSheet()
@@ -94,3 +103,9 @@ def usage_alert(usageReport: dict) -> int:
     ptext = '<font size="12">Made with ❤ by LKA</font>'
     Story.append(Paragraph(ptext, styles["Justify"]))
     doc2.build(Story)
+
+#for debuging purpose
+if __name__ == '__main__':
+    a = {1: 'PYTHON', 2: 'VSCODE', 3: 'MICROSOFT EDGE',
+         4: 'ITUNES', 5: 'FILEMANAGER', 6: 'KINDLE'}
+    usage_alert(a)
