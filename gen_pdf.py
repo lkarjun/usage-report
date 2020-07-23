@@ -5,6 +5,8 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
+from reportlab.platypus.tables import Table
+from reportlab.lib import colors
 
 fileName = 'tem/report.pdf'
 fileName_Alert = 'tem/Usage_alert.pdf'
@@ -54,15 +56,19 @@ def app_usage_pdf() -> int:
 
     return 0
 
-def usage_alert() -> int:
+def usage_alert(usageReport: dict) -> int:
+    table_data = []
+
+    for k, v in usageReport.items():
+        table_data.append([v, k])
+
     Story=[]
     mainTitle = 'USAGE ALERT'
     d = datetime.date.today()
-    reportImage = 'tem/figure.png'
+    table_style = [('GRID', (0,0), (-1,-1), 1, colors.black)]
+    report_table = Table(data=table_data, style=table_style, hAlign='LEFT')
     subtitle = 'Apps using high memory and cpu usage.'
     formatted_time = time.ctime()
-    im = Image(reportImage,5.5*inch,4*inch)
-
     styles=getSampleStyleSheet()
 
     #Main Heading
@@ -81,8 +87,8 @@ def usage_alert() -> int:
     Story.append(Paragraph(ptext, styles["Normal"]))
     Story.append(Spacer(1, 20))
 
-    #Matplotlib image display here
-    Story.append(im)
+    #Table display here
+    Story.append(report_table)
     Story.append(Spacer(2,45))
 
     ptext = '<font size="12">Made with ❤ by LKA</font>'
