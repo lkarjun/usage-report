@@ -7,6 +7,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.platypus.tables import Table
 from reportlab.lib import colors
+from typing import Dict
 
 fileName = 'tem/report.pdf'
 fileName_Alert = 'tem/Usage_alert.pdf'
@@ -56,7 +57,7 @@ def app_usage_pdf() -> int:
 
     return 0
 
-def usage_alert(usageReport: dict) -> int:
+def usage_alert(usageReport: Dict) -> int:
     table_data = []
 
     for k, v in usageReport.items():
