@@ -67,7 +67,8 @@ class FileManage(Securing):
         with open(fileName, 'w') as file:
             ziped_file = dict(zip(names, values))
             yaml.safe_dump(ziped_file, file)
-
+            
+        self.genKey()
         self.encrypt_data()
 
     def sendReceiverEmail(self) -> str:
