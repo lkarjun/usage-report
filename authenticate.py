@@ -67,7 +67,9 @@ class FileManage(Securing):
         with open(fileName, 'w') as file:
             ziped_file = dict(zip(names, values))
             yaml.safe_dump(ziped_file, file)
-        
+
+        self.encrypt_data()
+
     def sendReceiverEmail(self) -> str:
         '''
         decrypt the data and send the data then encrypt
@@ -101,3 +103,8 @@ class FileManage(Securing):
         copyFile = loadData.copy()
         self.encrypt_data()
         return copyFile['sendingMailPassword']
+
+
+if __name__ == '__main__':
+    obj = FileManage()
+    obj.add_data()
