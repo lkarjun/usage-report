@@ -5,6 +5,7 @@ import email.message
 import mimetypes
 
 auth = FileManage()
+fName = 'tem/Usage_alert.pdf'
 
 def send_email(message: str) -> int:
     """ for sending report """
@@ -28,4 +29,21 @@ def generate_error_report(subject: str):
     message["Subject"] = subject
     body = "Kindly Please check Your system, and resolve it."
     message.set_content(body)
+    #attachment adding
+    mime_type, _ = mimetypes.guess_type(fName)
+    mime_type, mime_subtype = mime_type.split('/', 1)
+
+    with open(fName, 'rb') as ap:
+        message.add_attachment(ap.read(),
+                        maintype = mime_type,
+                        subtype = mime_subtype,
+                        filename = fName
+                        )
     return message
+
+
+#For debugging purpose
+if __name__ == '__main__':
+    sub = 'Testing'
+    msg = generate_error_report(sub)
+    print(msg)
