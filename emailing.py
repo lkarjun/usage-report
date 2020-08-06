@@ -14,9 +14,8 @@ def send_email(message: str) -> int:
         """ to loading some credential """
         send_address = auth.sendSenderEmail()
         passs = auth.sendSenderPassword()
-        to_address = auth.sendReceiverEmail()
         mail_server.login(send_address, passs)
-        mail_server.sendmail(send_address, to_address, message)
+        mail_server.send_message(message)
         mail_server.quit()
         return 0
     except:
@@ -37,7 +36,7 @@ def generate_error_report(subject: str):
         message.add_attachment(ap.read(),
                         maintype = mime_type,
                         subtype = mime_subtype,
-                        filename = fName
+                        filename = 'Usage_Error.pdf'
                         )
     return message
 
@@ -46,4 +45,4 @@ def generate_error_report(subject: str):
 if __name__ == '__main__':
     sub = 'Testing'
     msg = generate_error_report(sub)
-    print(msg)
+    send_email(msg)
