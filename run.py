@@ -41,7 +41,7 @@ def listprocessor() -> Dict:
     listing = sorted(listing, key=lambda procObj: procObj['vms'], reverse=True)
     #top five apps using more memory
     top_five_apps = {
-                app['name']:app['vms']
+                app['name'][0:-4]:app['vms']
                 for app in listing[:6]
                 }
 
