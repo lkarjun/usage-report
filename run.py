@@ -1,7 +1,7 @@
 from re import findall
 from winapps import list_installed
 import psutil
-from typing import Counter, List, Literal
+from typing import Counter, List, Dict
 from time import sleep
 import shutil
 import emailing
@@ -24,19 +24,28 @@ def listapps() -> List:
                 #avoiding duplicate and return List
         return list(set(apps))
 
-def listprocessor() -> List:
-        '''Load all runing apps and return apps name as List'''
-        apps_load = psutil.process_iter()
-        listing_all_apps = [str(i) for i in apps_load]
-        regrex = r"name=['][\w\s.]*[']"
-        #Slicing for getting apps name only
-        apps = [
-                app[6:-5].lower()
-                for detail in listing_all_apps
-                for app in findall(regrex, detail)
-        ]
-        #avoiding duplicate and return List
-        return list(set(apps))
+def listprocessor() -> Dict:
+    '''Load all runing apps and return apps name as List'''
+    listing = []
+    # Iterate over the list
+    for proc in psutil.process_iter():
+       try:
+           # Fetch process details as dict
+           pinfo = proc.as_dict(attrs=['name'])
+           pinfo['vms'] = proc.memory_info().vms / (1024 * 1024)
+           # Append dict to list
+           listing.append(pinfo);
+       except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+           pass
+    # Sort list of dict by key vms i.e. memory usage
+    listing = sorted(listing, key=lambda procObj: procObj['vms'], reverse=True)
+    #top five apps using more memory
+    top_five_apps = {
+                app['name']:app['vms']
+                for app in listing[:6]
+                }
+
+    return top_five_apps
 
 def counting(apps: List[str], runningapps: List[str]) -> float:
         running_apps = []
