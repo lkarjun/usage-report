@@ -58,40 +58,44 @@ def counting(apps: List[str], runningapps: List[str]) -> float:
                         break
                 sleep(1)
 
-def check_cpu_usage():
+def check_cpu_usage() -> bool:
     """Verifies that there's enough unused CPU"""
     usage = psutil.cpu_percent(1)
     return usage > 80
 
-def check_disk_usage(disk):
+def check_disk_usage(disk: str) -> bool:
     """Verifies that there's enough free space on disk"""
     du = shutil.disk_usage(disk)
     free = du.free / du.total * 100
     return free > 20
 
-def check_available_memory():
+def check_available_memory() -> bool:
     """available memory in linux-instance, in byte"""
     available_memory = psutil.virtual_memory().available/(1024*1024)
     return available_memory > 500
 
-error_message = None
+def main() -> str:
+    error_message = None
 
-if check_cpu_usage():
-    error_message = "CPU usage is over 80%"
-elif not check_disk_usage('/'):
-    error_message = "Available disk space is less than 20%"
-elif not check_available_memory():
-    error_message = "Available memory is less than 500MB"
-else:
-    pass
+    if check_cpu_usage():
+        error_message = "CPU usage is over 80%"
+    elif not check_disk_usage('/'):
+        error_message = "Available disk space is less than 20%"
+    elif not check_available_memory():
+        error_message = "Available memory is less than 500MB"
+    else:
+        None
 
-
-
+    return error_message
 
 
 if __name__ == "__main__":
 
-        subject = f"Error - {error_message}"
-        message = emailing.generate_error_report(subject)
-        emailing.send_email(message) 
+    while True:
+        if main() != None:
+            print('error')
+            
+#         subject = f"Error - {error_message}"
+#         message = emailing.generate_error_report(subject)
+#         emailing.send_email(message) 
         
