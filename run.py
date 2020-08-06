@@ -90,7 +90,7 @@ def main() -> str:
 
 
 if __name__ == "__main__":
-
+    print('Running....')
     while True:
         msg = main()
         if msg != None:
@@ -101,6 +101,6 @@ if __name__ == "__main__":
             emailing.send_email(message) 
             print('Sended Email')
             time.sleep(300)
-            print('Runing....')
+            print('Running....')
             
         
