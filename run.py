@@ -5,7 +5,7 @@ from typing import Counter, List, Dict
 from time import sleep
 import shutil
 import emailing
-import authenticate
+import time
 import gen_pdf
 
 
@@ -92,8 +92,16 @@ def main() -> str:
 if __name__ == "__main__":
 
     while True:
-        if main() != None:
-            print('error')
+        msg = main()
+        if msg != None:
+            print('Sending Message')
+            gen_pdf.usage_alert(listprocessor())
+            subject = f"Error - {msg}"
+            message = emailing.generate_error_report(subject)
+            emailing.send_email(message) 
+            print('Sended Email')
+            time.sleep(30)
+            print('Runing....')
             
 #         subject = f"Error - {error_message}"
 #         message = emailing.generate_error_report(subject)
