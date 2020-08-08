@@ -91,8 +91,8 @@ def main() -> str:
 
 if __name__ == "__main__":
     print(f'\n....Starting....[{time.ctime()}]')
+    print(f'\n....Running....[{time.ctime()}]')
     while True:
-        print(f'\n....Running....[{time.ctime()}]')
         msg = main()
         if msg != None:
             print('\nSending Message')
@@ -102,6 +102,7 @@ if __name__ == "__main__":
             emailing.send_email(message) 
             print(f'\n__Sended Email__[{time.ctime()}]')
             time.sleep(30)
+            print(f'\n....Running....[{time.ctime()}]')
             
             
         
