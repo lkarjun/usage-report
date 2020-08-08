@@ -90,17 +90,17 @@ def main() -> str:
 
 
 if __name__ == "__main__":
-    print(f'....Running....[{time.ctime()}]')
+    print(f'\n....Running....[{time.ctime()}]')
     while True:
         msg = main()
         if msg != None:
-            print('Sending Message')
+            print('\nSending Message')
             gen_pdf.usage_alert(listprocessor())
             subject = f"Error - {msg}"
             message = emailing.generate_error_report(subject)
             emailing.send_email(message) 
-            print(f'__Sended Email__[{time.ctime()}]')
-            time.sleep(300)
-            print(f'....Running....[{time.ctime()}]')
+            print(f'\n__Sended Email__[{time.ctime()}]')
+            time.sleep(30)
+            print(f'\n....Running....[{time.ctime()}]')
             
         
