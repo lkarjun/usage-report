@@ -90,7 +90,7 @@ def main() -> str:
 
 
 if __name__ == "__main__":
-    print('Running....')
+    print(f'....Running....[{time.ctime()}]')
     while True:
         msg = main()
         if msg != None:
@@ -99,8 +99,8 @@ if __name__ == "__main__":
             subject = f"Error - {msg}"
             message = emailing.generate_error_report(subject)
             emailing.send_email(message) 
-            print('Sended Email')
+            print(f'__Sended Email__[{time.ctime()}]')
             time.sleep(300)
-            print('Running....')
+            print(f'....Running....[{time.ctime()}]')
             
         
