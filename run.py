@@ -100,7 +100,7 @@ if __name__ == "__main__":
             message = emailing.generate_error_report(subject)
             emailing.send_email(message) 
             print(f'\n__Sended Email__[{time.ctime()}]')
-            time.sleep(30)
+            time.sleep(300)
             print(f'\n....Running....[{time.ctime()}]')
             
         
