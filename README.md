@@ -1,5 +1,7 @@
 # <h1 align="center" color="Green">Automating AppUsage Report in Windows - Python</h1>
 
+Building...
+
 Before runing run.py ->
     if you're an first user then, run authentication.py. To save some credentials.
 
