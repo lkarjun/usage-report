@@ -8,6 +8,7 @@
 
 2. Before runing run.py ->
    * if you're an first user then, run authentication.py. To save some credentials.
+   * use sender email address as "no.reply.usagereport@gmail.com", password "UsageReport211".
 
 3. Run python file run.py ->
    * if the system crash due to cpu, memory issue its automatically send a alert message to authority through email.
