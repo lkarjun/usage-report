@@ -45,4 +45,4 @@ def generate_error_report(subject: str):
 if __name__ == '__main__':
     sub = 'Testing'
     msg = generate_error_report(sub)
-    send_email(msg)
+    print(send_email(msg))
