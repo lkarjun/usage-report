@@ -92,12 +92,9 @@ def main() -> str:
 def create_log(value: int) -> None:
     print(value)
     with open('tem/log.txt', 'a') as file:
-        file.write(f"Mail_Sending {time.ctime()} {value}\n")
+        file.write(f"Mail_Sended time = ({time.ctime()}) error = {value}\n")
 
-
-if __name__ == "__main__":
-    print(f'\n....Starting....[{time.ctime()}]')
-    print(f'\n....Running....[{time.ctime()}]')
+def run() -> None:
     while True:
         msg = main()
         if msg != None:
@@ -111,6 +108,8 @@ if __name__ == "__main__":
             time.sleep(30)
             system('cls')
             print(f'\n....Running....[{time.ctime()}]')
-            
-            
-        
+
+if __name__ == "__main__":
+    print(f'\n....Starting....[{time.ctime()}]')
+    print(f'\n....Running....[{time.ctime()}]')
+    run()
