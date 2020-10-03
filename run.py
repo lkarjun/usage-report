@@ -7,7 +7,7 @@ import shutil
 import emailing
 import time
 import gen_pdf
-from os import system
+from os import system, write
 
 
 def listapps() -> List:
@@ -89,6 +89,11 @@ def main() -> str:
 
     return error_message
 
+def create_log(value: int) -> None:
+    print(value)
+    with open('tem/log.txt', 'a') as file:
+        file.write(f"Mail_Sending {time.ctime()} {value}\n")
+
 
 if __name__ == "__main__":
     print(f'\n....Starting....[{time.ctime()}]')
@@ -100,7 +105,8 @@ if __name__ == "__main__":
             gen_pdf.usage_alert(listprocessor())
             subject = f"Error - {msg}"
             message = emailing.generate_error_report(subject)
-            print(emailing.send_email(message)) 
+            emailed = emailing.send_email(message)
+            create_log(emailed)
             print(f'\n__Sended Email__[{time.ctime()}]')
             time.sleep(30)
             system('cls')
