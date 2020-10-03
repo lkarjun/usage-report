@@ -1,1 +1,4 @@
 Mail_Sending Sat Oct  3 10:13:51 2020 0
+Mail_Sended time = (Sat Oct  3 10:21:14 2020) error = 0
+Mail_Sended time = (Sat Oct  3 10:22:07 2020) error = 0
+Mail_Sended time = (Sat Oct  3 10:24:04 2020) error = 0
